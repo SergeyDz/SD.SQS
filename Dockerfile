@@ -15,4 +15,4 @@ COPY . /
 
 RUN  npm install
 
-ENTRYPOINT ["nodejs worker.js"]
+ENTRYPOINT ["nodejs", "worker.js"]

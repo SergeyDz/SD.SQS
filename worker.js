@@ -3,10 +3,14 @@ var log = require('./Log.js').Log;
 var sqs = require('sqs');
 
 var amqplib = require('amqplib/callback_api');
-var q = 'parties';
-var mq = 'amqp://guest:guest@10.1.1.231:31063';
+var q = 'entities';
+var mq = 'amqp://guest:guest@10.1.1.231:5672';
 
 var args = process.argv.slice(2);
+
+log.info('started');
+log.info(args[2]);
+
  
 var queue = sqs({
 	access: args[0],
