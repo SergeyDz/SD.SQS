@@ -1,0 +1,19 @@
+{
+  "name": "sd.sqs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "worker.js",
+  "dependencies": {
+    "sqs": "latest",
+    "promise": "latest", 
+    "bunyan": "latest",
+    "bunyan-elasticsearch": "latest",
+    "amqplib": "latest"
+  },
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
