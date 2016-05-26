@@ -27,7 +27,20 @@ function pullSQS(rabbit)
 {
     queue.pull(args[3], function(message, callback) {
         log.info(message);  
-        rabbit.sendToQueue(q, new Buffer(JSON.stringify(message)));
+        
+        var payload = { 
+          EventType: message.EventType,  
+          EventId: message.EventId,
+          TenantId: message.TenantId,
+          Action: message.Payload.Name,
+          Entity: 
+          {
+            Id: message.Payload.Source.EntityId,
+            Name: message.Payload.Source.Name
+          }
+      };
+        
+        rabbit.sendToQueue(q, new Buffer(JSON.stringify(payload)));
         callback(); // we are done with this message - pull a new one 
                     // calling the callback will also delete the message from the queue 
     });
