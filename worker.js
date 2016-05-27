@@ -33,6 +33,7 @@ function pullSQS(rabbit)
           EventId: message.EventId,
           TenantId: message.TenantId,
           Action: message.Payload.Name,
+          CorrelationId: message.CorrelationId,
           Entity: 
           {
             Id: message.Payload.Source.EntityId,
