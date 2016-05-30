@@ -57,6 +57,15 @@ amqplib.connect(mq, function(err, conn) {
         ch.assertExchange(q + '_gateway', 'fanout', { durable: true, auto_delete: false });
         ch.assertExchange(q + '_distributor', 'topic', { durable: true, auto_delete: false });
         ch.bindExchange(q + '_distributor', q + '_gateway');
+
+        ch.assertQueue(q,
+          {
+            exclusive: false,
+            durable: true,
+            autoDelete: false
+          }, function(err, queue) { ch.bindQueue(q, q + '_gateway', '#');}
+        );
+
         pullSQS(ch);
       }
 });
