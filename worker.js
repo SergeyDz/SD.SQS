@@ -41,7 +41,7 @@ function pullSQS(rabbit)
           }
       };
 
-        rabbit.publish(q, message.Payload.Name, new Buffer(JSON.stringify(payload)));
+        rabbit.publish(q + '_gateway', message.Payload.Name, new Buffer(JSON.stringify(payload)));
         callback(); // we are done with this message - pull a new one
                     // calling the callback will also delete the message from the queue
     });
@@ -54,7 +54,9 @@ amqplib.connect(mq, function(err, conn) {
       conn.createChannel(on_open);
       function on_open(err, ch) {
         if (err != null) bail(err);
-        ch.assertExchange(q, 'topic', { durable: false });
+        ch.assertExchange(q + '_gateway', 'fanout', { durable: true, auto_delete: false });
+        ch.assertExchange(q + '_distributor', 'topic', { durable: true, auto_delete: false });
+        ch.bindExchange(q + '_distributor', q + '_gateway');
         pullSQS(ch);
       }
 });
