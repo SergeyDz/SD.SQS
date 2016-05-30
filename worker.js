@@ -54,7 +54,7 @@ amqplib.connect(mq, function(err, conn) {
       conn.createChannel(on_open);
       function on_open(err, ch) {
         if (err != null) bail(err);
-        ch.assertExchange(q, 'direct', { durable: false });
+        ch.assertExchange(q, 'topic', { durable: false });
         pullSQS(ch);
       }
 });
