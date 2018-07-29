@@ -2,7 +2,7 @@
 
 # DOCKER-VERSION 0.10.0
 
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 
 # Install Node.js and npm
 RUN 	apt-get update
