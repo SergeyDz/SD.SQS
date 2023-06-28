@@ -2,7 +2,7 @@
 
 # DOCKER-VERSION 0.10.0
 
-FROM ubuntu:16.04
+FROM ubuntu:xenial-20210416
 
 # Install Node.js and npm
 RUN 	apt-get update
